@@ -7,11 +7,14 @@ from bottle import run, route, request, static_file, redirect
 
 # variables
 audio_save_location = os.path.join(os.getcwd(), 'audio')
+index_template_file = open(os.path.join(os.getcwd(), 'templates', 'index.html'))
+index_template = index_template_file.read()
+index_template_file.close()
 
 @route('/')
 def index():
 	# This is naked HTML, soon to be replaced with good templating... Sorry!
-    return '<form action="/gen" method="post"><input type="text" name="text" style="font-size:16px; margin: 2em;"/> <input type="submit" /></form>'
+    return index_template
 
 @route("/gen", method='POST')
 def genaudio():
