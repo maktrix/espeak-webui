@@ -3,7 +3,11 @@
 import subprocess
 import os
 import uuid
-from bottle import run, route, request, static_file, redirect, SimpleTemplate
+import tempfile
+from bottle import run, route, request, static_file, redirect, SimpleTemplate, default_app
+from paste import httpserver
+
+application = default_app()
 
 # variables
 audio_save_location = os.path.join(os.getcwd(), 'audio')
@@ -57,4 +61,4 @@ def getaudio(path):
 if not os.path.exists(audio_save_location):
 	os.makedirs(audio_save_location)
 
-run(host='0.0.0.0', port=8080, debug=True)
+httpserver.serve(application, host='127.0.0.1', port=8080)
