@@ -53,4 +53,8 @@ def getaudio(path):
     os.unlink(os.path.join(audio_save_location,path))
 
 
+# make the audio directory if it doesn't exist
+if not os.path.exists(audio_save_location):
+	os.makedirs(audio_save_location)
+
 run(host='0.0.0.0', port=8080, debug=True)
