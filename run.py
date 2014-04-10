@@ -50,5 +50,7 @@ def getplayer(path):
 @route('/audio/<path:path>')
 def getaudio(path):
     return static_file(path, root=audio_save_location)
+    os.unlink(os.path.join(audio_save_location,path))
+
 
 run(host='0.0.0.0', port=8080, debug=True)
